@@ -1,8 +1,8 @@
 print("SCRIPT: EFR Fixes");
 
 // Smooth quartz recipe conflict with ExU burnt quartz
-furnace.remove(<etfuturum:smooth_quartz>);
-recipes.addShapeless(<etfuturum:smooth_quartz> * 1, [<minecraft:quartz_block>]);
+recipes.addShapeless(<etfuturum:smooth_quartz> * 1, [<ExtraUtilities:decorativeBlock1:2>]);
+recipes.addShapeless(<ExtraUtilities:decorativeBlock1:2> * 1, [<etfuturum:smooth_quartz>]);
 
 // Add thaumcraft aspects
 // (Chest) boats
