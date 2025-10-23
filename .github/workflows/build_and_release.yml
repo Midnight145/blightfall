@@ -25,7 +25,7 @@ jobs:
         working-directory: output_build
         run: |
           mkdir -p output
-          python3 script.py "${{ github.ref_name }}"
+          python3 make_outputs.py "${{ github.ref_name }}"
 
       # Create the release if it doesn't exist
       - name: Create GitHub Release
