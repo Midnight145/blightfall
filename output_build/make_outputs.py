@@ -1,9 +1,10 @@
-import glob
+#! /usr/bin/env python3
 import os
 import re
-import shutil
 import zipfile
 import sys
+import tempfile
+import json
 
 OUTPUT_VERSION = ""
 if len(sys.argv) > 1:
@@ -14,50 +15,9 @@ CLIENT_ONLY = "client_only"
 SERVER_ONLY = "server_only"
 CLIENT_EXCLUDE = "client_exclude"
 SERVER_EXCLUDE = "server_exclude"
-
-TOP_LEVEL_CLIENT_OUTPUT_FILES = [
-    "technic_blightfall.png",
-    "instance.cfg",
-    "mmc-pack.json",
-    "technic_blightfall",
-]
-
-
-files_filter = {
-    INCLUDE_IN_BOTH_KEY : [
-        "config",
-        "customnpcs",
-        "mods",
-        "resourcepacks",
-        "schematics",
-        "scripts",
-        "flans"
-    ],
-    # these are for files to remove from "INCLUDE_IN_BOTH_KEY"
-    CLIENT_EXCLUDE : [],
-    SERVER_EXCLUDE : [
-        r"mods/.+client.*?\.jar"
-    ],
-
-    CLIENT_ONLY : [
-        "options.txt",
-    ] + TOP_LEVEL_CLIENT_OUTPUT_FILES,
-    SERVER_ONLY : [
-        "libraries",
-        "Blightfall.jar",
-        "log4j2_server.xml",
-        "minecraft_server.1.7.10.jar",
-        "PerfectSpawn.json",
-        "server.properties",
-        "start.bat",
-        "start.sh",
-    ]
-}
-
-RENAME_MAP = {
-    "flans" : "world"
-}
-
+TO_FORMAT = "to_format"
+RENAME_MAP = "rename_map"
+TOP_LEVEL_CLIENT_OUTPUT_FILES = "toplevel_client_files"
 
 ROOT_DIR = os.path.dirname(os.getcwd())
 OUTPUT_DIR = os.path.join(os.getcwd(), "output")
@@ -67,59 +27,97 @@ SERVER_ZIP = os.path.join(OUTPUT_DIR, f"blightfall-{OUTPUT_VERSION}server.zip")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-client_files = set()
-server_files = set()
+def format_file(path: str, replace: dict[str, str], tmp: str) -> str:
+    """
+    Formats a file by replacing placeholders with provided values.
+    Args:
+        path (str): The path to the file to format.
+        replace (dict): A dictionary of placeholder-value pairs.
+        tmp (str): The directory to save the formatted temporary file.
+    Returns:
+        str: The path to the formatted temporary file.
+    """
+    cwd = os.getcwd()
+    os.chdir("..")
+    with open(path, "r") as opened:
+        content = opened.read()
+        for key, value in replace.items():
+            content = content.replace("{" + key + "}", value)
+        temp_path = os.path.join(tmp, path)
+
+    os.makedirs(os.path.dirname(temp_path), exist_ok=True)
+    with open(temp_path, "w") as temp_file:
+        temp_file.write(content)
+    os.chdir(cwd)
+    return temp_path
 
 def matches_any(path, patterns):
     return any(re.search(p, path) for p in patterns)
 
-# Collect files to include
-for base, dirs, files in os.walk(ROOT_DIR):
-    rel_dir = os.path.relpath(base, ROOT_DIR)
-    if rel_dir.startswith("output"):
-        continue
-    
-    for f in files:
-        rel_path = os.path.join(rel_dir, f).replace("\\", "/")
-        # print(rel_path)
 
-        included_in_both = any(rel_path.startswith(p) for p in files_filter[INCLUDE_IN_BOTH_KEY])
-        client_only = any(rel_path.startswith(p) for p in files_filter[CLIENT_ONLY]) or\
-                        f in files_filter[CLIENT_ONLY]
-        server_only = any(rel_path.startswith(p) for p in files_filter[SERVER_ONLY]) or\
-                        f in files_filter[SERVER_ONLY]
+def collect_files(directory: str, config: dict, tmp = "./tmp") -> tuple[set[str], set[str]]:
+    def should_include(relative_path: str, filename, patterns: list[str]) -> bool:
+        return any(relative_path.startswith(p) for p in patterns) or filename in patterns
+    config[CLIENT_ONLY] += config[TOP_LEVEL_CLIENT_OUTPUT_FILES]
+    client_files = set()
+    server_files = set()
 
-        if included_in_both:
-            if not matches_any(rel_path, files_filter[CLIENT_EXCLUDE]):
-                client_files.add(rel_path)
-            if not matches_any(rel_path, files_filter[SERVER_EXCLUDE]):
-                server_files.add(rel_path)
-        elif client_only:
-            client_files.add(rel_path)
-        elif server_only:
-            server_files.add(rel_path)
+    for base, dirs, files in os.walk(directory):
+        rel_dir = os.path.relpath(base, directory)
+        if rel_dir.startswith("output"):
+            continue
+
+        for file in files:
+            rel_path = os.path.join(rel_dir, file).replace(r"\\", "/")
+
+            included_in_both = should_include(rel_path, file, config[INCLUDE_IN_BOTH_KEY])
+            client_only = should_include(rel_path, file, config[CLIENT_ONLY])
+            server_only = should_include(rel_path, file, config[SERVER_ONLY])
+
+            final_path = rel_path if not file in config[TO_FORMAT].keys() else format_file(rel_path, config[TO_FORMAT][file], tmp)
+
+            if included_in_both:
+                if not matches_any(rel_path, config[CLIENT_EXCLUDE]):
+                    client_files.add(final_path)
+                if not matches_any(rel_path, config[SERVER_EXCLUDE]):
+                    server_files.add(final_path)
+            elif client_only:
+                client_files.add(final_path)
+            elif server_only:
+                server_files.add(final_path)
+    return client_files, server_files
 
 
-def create_zip(zip_path, files, is_client):
+def create_zip(zip_path, files, config, is_client, tmp="./tmp"):
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zipf:
         for f in files:
             arcname = f
+            arcname = arcname.replace(tmp, "")
             if is_client:
-                if os.path.basename(f) not in TOP_LEVEL_CLIENT_OUTPUT_FILES:
+                if os.path.basename(f) not in config[TOP_LEVEL_CLIENT_OUTPUT_FILES]:
                     arcname = "minecraft/" + arcname
-            for old, new in RENAME_MAP.items():
+            for old, new in config[RENAME_MAP].items():
                 if arcname.startswith(old + "/"):
                     arcname = arcname.replace(old + "/", new + "/", 1)
                     break
             zipf.write(os.path.join(ROOT_DIR, f), arcname=arcname)
 
-print("starting client file creation")
-create_zip(CLIENT_ZIP, client_files, is_client=True)
-print("done with client")
-print("starting server file creation")
-create_zip(SERVER_ZIP, server_files, is_client=False)
-print("done with server")
+if __name__ == "__main__":
+    with open("config.json") as config_file:
+        config = config_file.read()
+        # this kinda sucks, but .format() doesn't work with curly braces in json
+        # i cant think of a decent dynamic way to do without being incredibly slow and complex
+        config = config.replace("{OUTPUT_VERSION}", OUTPUT_VERSION)
+        config = json.loads(config)
 
-print(f"Client zip created: {CLIENT_ZIP}")
-print(f"Server zip created: {SERVER_ZIP}")
+    with tempfile.TemporaryDirectory() as tmp:
+        client, server = collect_files("..", config, tmp=tmp)
+        print("starting client file creation")
+        create_zip(CLIENT_ZIP, client, config, is_client=True, tmp=tmp)
+        print("done with client")
+        print("starting server file creation")
+        create_zip(SERVER_ZIP, server, config, is_client=False, tmp=tmp)
+        print("done with server")
 
+        print(f"Client zip created: {CLIENT_ZIP}")
+        print(f"Server zip created: {SERVER_ZIP}")
