@@ -74,7 +74,7 @@ def collect_files(directory: str, config: dict, tmp = "./tmp") -> tuple[set[str]
             client_only = should_include(rel_path, file, config[CLIENT_ONLY])
             server_only = should_include(rel_path, file, config[SERVER_ONLY])
 
-            final_path = rel_path if not file in config[TO_FORMAT].keys() else format_file(rel_path, config[TO_FORMAT][file], tmp)
+            final_path = rel_path if not file in config[TO_FORMAT] else format_file(rel_path, config[TO_FORMAT][file], tmp)
 
             if included_in_both:
                 if not matches_any(rel_path, config[CLIENT_EXCLUDE]):
