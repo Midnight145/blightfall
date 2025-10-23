@@ -1,0 +1,50 @@
+{
+    "toplevel_client_files": [
+        "technic_blightfall.png",
+        "instance.cfg",
+        "mmc-pack.json",
+        "technic_blightfall"
+    ],
+    "both": [
+        "config",
+        "customnpcs",
+        "mods",
+        "resourcepacks",
+        "schematics",
+        "scripts",
+        "flans"
+    ],
+    "client_exclude": [
+        ".git.*"
+    ],
+    "server_exclude" : [
+        ".git.*",
+        "mods/.+client.*?\\.jar",
+        "mods/liteloader.+",
+        "mods/controlling.*?\\.jar",
+        "mods/fluxloading.*?\\.jar",
+        "mods/itlt.*?\\.jar",
+        "mods/.+.litemod.*"
+
+    ],
+    "client_only": [
+        "liteconfig",
+        "options.txt"
+    ],
+    "server_only": [
+        "libraries",
+        "Blightfall.jar",
+        "log4j2_server.xml",
+        "minecraft_server.1.7.10.jar",
+        "PerfectSpawn.json",
+        "server.properties",
+        "start.bat",
+        "start.sh"
+    ],
+    "to_format": {
+        "instance.cfg": {"version":  "{OUTPUT_VERSION}"}
+    },
+    "rename_map": {
+        "flans": "world"
+    }
+}

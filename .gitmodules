@@ -1,0 +1,6 @@
+[submodule "flans"]
+	path = flans
+	url = git@github.com:Midnight145/blightfall-flans.git
+[submodule "mods"]
+	path = mods
+	url = git@github.com:Midnight145/blightfall-mods.git
