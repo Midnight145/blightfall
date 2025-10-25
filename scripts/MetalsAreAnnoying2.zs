@@ -169,7 +169,7 @@ recipes.remove(<TConstruct:MetalBlock:9>);
 recipes.addShapeless(<TConstruct:MetalBlock:9>, [steelIngotDict, steelIngotDict, steelIngotDict, steelIngotDict, steelIngotDict, steelIngotDict, steelIngotDict, steelIngotDict, steelIngotDict]);
 recipes.addShapeless(steelIngot * 9, [<ore:blockSteel>]);
 recipes.addShapeless(steelIngot, [steelNuggetDict, steelNuggetDict, steelNuggetDict, steelNuggetDict, steelNuggetDict, steelNuggetDict, steelNuggetDict, steelNuggetDict, steelNuggetDict]);
-recipes.addShapeless(steelNugget, [steelIngot]);
+recipes.addShapeless(steelNugget * 9, [steelIngotDict]);
 
 
                    //////////
