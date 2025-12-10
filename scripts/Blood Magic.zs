@@ -39,3 +39,9 @@ mods.bloodmagic.Binding.addRecipe(<ExtraUtilities:angelRing:1>, <blighttweaks:bo
 mods.bloodmagic.Binding.addRecipe(<ExtraUtilities:angelRing:2>, <blighttweaks:boundRing:2>);
 mods.bloodmagic.Binding.addRecipe(<ExtraUtilities:angelRing:3>, <blighttweaks:boundRing:3>);
 mods.bloodmagic.Binding.addRecipe(<ExtraUtilities:angelRing:4>, <blighttweaks:boundRing:4>);
+
+// Sigil of the Hardened Soul
+mods.bloodmagic.BloodOrb.addShaped(<blighttweaks:soulSigil>,
+                [[<AWWayofTime:bloodMagicBaseItems:16>, <AWWayofTime:bloodMagicBaseItems:30>, <AWWayofTime:bloodMagicBaseItems:16>],
+                 [<AWWayofTime:bloodMagicBaseItems:17>, <AWWayofTime:bloodMagicBaseItems:27>, <AWWayofTime:bloodMagicBaseItems:17>],
+                 [<AWWayofTime:bloodMagicBaseItems:16>, 6, <AWWayofTime:bloodMagicBaseItems:16>]]);
