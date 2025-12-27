@@ -44,4 +44,4 @@ mods.bloodmagic.Binding.addRecipe(<ExtraUtilities:angelRing:4>, <blighttweaks:bo
 mods.bloodmagic.BloodOrb.addShaped(<blighttweaks:soulSigil>,
                 [[<AWWayofTime:bloodMagicBaseItems:16>, <AWWayofTime:bloodMagicBaseItems:30>, <AWWayofTime:bloodMagicBaseItems:16>],
                  [<AWWayofTime:bloodMagicBaseItems:17>, <AWWayofTime:bloodMagicBaseItems:27>, <AWWayofTime:bloodMagicBaseItems:17>],
-                 [<AWWayofTime:bloodMagicBaseItems:16>, 6, <AWWayofTime:bloodMagicBaseItems:16>]]);
+                 [<AWWayofTime:bloodMagicBaseItems:16>, <AWWayofTime:transcendentBloodOrb>, <AWWayofTime:bloodMagicBaseItems:16>]]);
