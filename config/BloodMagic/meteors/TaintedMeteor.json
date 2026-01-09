@@ -3,7 +3,8 @@
     "ores": [
         "Thaumcraft:blockTaint:0:30",
         "Thaumcraft:blockTaint:1:20",
-        "ForbiddenMagic:TaintLeaves:4:10"
+        "ForbiddenMagic:TaintLeaves:4:10",
+        "Thaumcraft:blockFluxGoo:8:5"
     ],
     "filler": [
         "ForbiddenMagic:TaintBlock:0:10",
