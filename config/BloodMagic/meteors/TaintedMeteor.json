@@ -9,7 +9,7 @@
         "ForbiddenMagic:TaintBlock:0:10",
         "Natura:soil.tainted:0:8"
     ],
-    "radius": 10,
+    "radius": 50,
     "cost": 100000000,
     "focusItem": "Thaumcraft:ItemBottleTaint",
     "fillerChance": 65
