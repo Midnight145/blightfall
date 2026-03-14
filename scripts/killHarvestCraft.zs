@@ -525,7 +525,6 @@ recipes.remove(<harvestcraft:zestyzucchiniItem>);
 recipes.remove(<harvestcraft:zombiejerkyItem>);
 recipes.remove(<harvestcraft:zucchinibakeItem>);
 recipes.remove(<harvestcraft:zucchinibreadItem>);
-recipes.remove(<harvestcraft:zucchiniseedItem>);
 
 
 
@@ -664,7 +663,6 @@ greenveggie.remove(<harvestcraft:lettuceItem>);
 greenveggie.remove(<harvestcraft:okraItem>);
 greenveggie.remove(<harvestcraft:seaweedItem>);
 greenveggie.remove(<harvestcraft:spinachItem>);
-greenveggie.remove(<harvestcraft:zucchiniItem>);
 
 val grain = <ore:listAllgrain>;
 
