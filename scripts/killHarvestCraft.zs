@@ -763,7 +763,6 @@ recipes.remove(<harvestcraft:zestyzucchiniItem>);
 recipes.remove(<harvestcraft:zombiejerkyItem>);
 recipes.remove(<harvestcraft:zucchinibakeItem>);
 recipes.remove(<harvestcraft:zucchinibreadItem>);
-recipes.remove(<harvestcraft:zucchinifriesItem>);
 recipes.remove(<harvestcraft:zucchiniItem>);
 recipes.remove(<harvestcraft:zucchiniseedItem>);
 
@@ -806,7 +805,6 @@ veggie.remove(<harvestcraft:spinachItem>);
 veggie.remove(<harvestcraft:sweetpotatoItem>);
 veggie.remove(<harvestcraft:whitemushroomItem>);
 veggie.remove(<harvestcraft:wintersquashItem>);
-veggie.remove(<harvestcraft:zucchiniItem>);
 
 val spice = <ore:listAllspice>;
 
@@ -868,7 +866,6 @@ seed.remove(<harvestcraft:sweetpotatoseedItem>);
 seed.remove(<harvestcraft:teaseedItem>);
 seed.remove(<harvestcraft:whitemushroomseedItem>);
 seed.remove(<harvestcraft:wintersquashseedItem>);
-seed.remove(<harvestcraft:zucchiniseedItem>);
 
 val rootveggie = <ore:listAllrootveggie>;
 
