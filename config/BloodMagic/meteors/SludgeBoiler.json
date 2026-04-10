@@ -1,0 +1,23 @@
+{
+    "ores": [
+        "minecraft:sand:0:50",
+        "minecraft:clay:0:30",
+        "minecraft:dirt:1:30",
+        "minecraft:dirt:0:10",
+        "minecraft:gravel:0:10",
+        "minecraft:sand:1:5",
+        "minecraft:soul_sand:0:5",
+        "minecraft:mycelium:0:3",
+        "minecraft:dirt:2:2",
+        "minecraft:netherrack:0:1",
+        "Natura:heatsand:0:5",
+        "Natura:soil.tainted:0:5"
+    ],
+    "filler": [
+        "MineFactoryReloaded:sludge.still:0:1"
+    ],
+    "radius": 10,
+    "cost": 1000000,
+    "focusItem": "MineFactoryReloaded:machine.0:9",
+    "fillerChance": 1
+}

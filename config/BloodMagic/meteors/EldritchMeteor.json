@@ -1,10 +1,12 @@
 {
+    "comment": "Ore order: Ancient Stone, Ancient Rock, Crusted Stone, Glowing Crusted Stone, Glyphed Stone, Obsidian Totem, Ancient Stone Pedestal",
     "ores": [
         "Thaumcraft:blockCosmeticSolid:11:100",
         "Thaumcraft:blockCosmeticSolid:12:10",
         "Thaumcraft:blockCosmeticSolid:14:50",
         "Thaumcraft:blockEldritch:4:30",
         "Thaumcraft:blockEldritch:5:10",
+        "Thaumcraft:blockCosmeticSolid:0:10",
         "Thaumcraft:blockCosmeticSolid:15:1"
     ],
     "radius": 5,
