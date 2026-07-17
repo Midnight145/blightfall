@@ -25,7 +25,8 @@
         "mods/fluxloading.*?\\.jar",
         "mods/itlt.*?\\.jar",
         "mods/.+.litemod.*",
-        "mods/.*[Ll]ockdown.*.jar"
+        "mods/.*[Ll]ockdown.*.jar",
+        "mods/[Ss]ound[Ll]imit[Ee]xtends.+"
 
     ],
     "client_only": [
