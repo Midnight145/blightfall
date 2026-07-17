@@ -1,0 +1,21 @@
+{
+    "comment": "Ore order: Raw Meat Block, Cooked Meat Block, Hambone, Block of Flesh, Bone Block, Blood (Fluid). Focus item: Pink Slime Crystal",
+    "ores": [
+        "MineFactoryReloaded:brick:12:20",
+        "MineFactoryReloaded:brick:13:30",
+        "TConstruct:MeatBlock:0:10",
+        "Thaumcraft:blockTaint:2:10",
+        "etfuturum:bone:0:5",
+        "TConstruct:liquid.blood:0:5",
+        "MineFactoryReloaded:pinkslime.still:0:5"
+    ],
+    "filler": [
+        "chisel:chisel.hellrock:10:10",
+        "chisel:chisel.hellrock:11:10",
+        "chisel:chisel.hellrock:12:10"
+    ],
+    "radius": 5,
+    "cost": 5000000,
+    "focusItem": "MineFactoryReloaded:pinkslime:1",
+    "fillerChance": 65
+}
