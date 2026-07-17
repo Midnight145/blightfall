@@ -4,35 +4,8 @@ import minetweaker.item.IItemStack;
 print("Loading Botania Tweaks");
 print("Removing Botania Fertilizers");
 
-//Hide and kill old Floral Fertilizer
-recipes.remove(<Botania:fertilizer>);
-
-print("Removed Botania Fertilizers");
 print("Modifying Botania Lexicon");
 
-//Flowers are really different in Blightfall. :/
-Lexicon.removePage("botania.entry.flowers", 0);
-Lexicon.addTextPage("botania.page.blightfallFlower0","botania.entry.flowers",0);
-game.setLocalization("en_US", "botania.page.blightfallFlower0", "Around the world, you may stumble upon a large variety of Mystical Flora. Finding them may be hard, because the taint has nearly driven them to extinction.<br>They come in a total of &416 &0different colors.<br>Once you find some, it becomes possible to grow more of these flowers using &1Floral Fertilizer&0 (read on).");
-Lexicon.removePage("botania.entry.flowers", 6);
-Lexicon.addTextPage("botania.page.blightfallFlower6","botania.entry.flowers",6);
-game.setLocalization("en_US", "botania.page.blightfallFlower6", "Right clicking the &1Floral Powder&0 in any &1Wool&0 or &1Carpet&0 changes its color to the color of the powder.<br>By mixing the &1Floral Powder&0 with some &1Bone Meal&0, it's possible to create &1Floral Fertilizer&0, which will grow a small amount of &1Mystical Flowers&0 in the nearby vicinity. The color of the flowers that grow depends on the flowers used to craft the fertilizer.");
-Lexicon.removePage("botania.entry.flowers", 8);
-Lexicon.addTextPage("botania.page.blightfallFlower8","botania.entry.flowers",8);
-game.setLocalization("en_US", "botania.page.blightfallFlower8", "Normal flowers simply cannot be made into floral fertilizer, no matter what you may have heard. If you have no mystical flowers, and want more, perhaps the Thaumaturges have a way to help? You should look in the Thaumonomicon for more info.");
-Lexicon.removePage("botania.entry.flowers", 9);
-Lexicon.addTextPage("botania.page.blightfallFlower9","botania.entry.flowers",9);
-game.setLocalization("en_US", "botania.page.blightfallFlower9", "There's also a taller variants of the typical &1Mystical Flowers&0. These can only be gathered with &1Shears&0, but can be used to obtain twice the amount of petals a normal flower would yield. They're a bit too big for dye, though.<br>They can be made by fertilizing a &1Mystical Flower&0 with &1Bone Meal&0.");
-
-print("botania.entry.flowers modified");
-//Update Lexicon to show it.
-Lexicon.removePage("botania.entry.lexicon", 2);
-mods.botania.Lexicon.addCraftingPage("botania.page.blightfallLexicon","botania.entry.lexicon",2,
-               [<Botania:lexicon> * 2],
-
-					     [[[<Botania:lexicon>, <minecraft:book>, null]]]);
-game.setLocalization("en_US", "botania.page.blightfallLexicon", "Copying the Lexicon.");
-print("Lexicon entry modified");
 //Edit Pure Daisy to mention anti-taint effects and that it can be found in the world.
 Lexicon.addTextPage("botania.page.BlightfallPureDaisy5","botania.entry.pureDaisy",5);
 game.setLocalization("en_US", "botania.page.BlightfallPureDaisy5", "These flowers also seem to have a &1cleansing&0 effect on the taint. This makes it easy to spot them &1in the wild&0; just look for small patches of purified land.");
@@ -78,7 +51,17 @@ print("Whisperweed entry modified");
 recipes.remove(<Botania:lexicon>);
 recipes.addShapeless(<Botania:lexicon>, [<TabulaRasa:RasaItem0:19>, <TabulaRasa:RasaItem0:18>]);
 recipes.addShapeless(<Botania:lexicon>*2, [<Botania:lexicon>, <minecraft:book>]);
+
+Lexicon.removePage("botania.entry.lexicon", 2);
+mods.botania.Lexicon.addCraftingPage("botania.page.blightfallLexicon","botania.entry.lexicon",2,
+               [<Botania:lexicon> * 2],
+
+					     [[[<Botania:lexicon>, <minecraft:book>, null]]]);
+game.setLocalization("en_US", "botania.page.blightfallLexicon", "Copying the Lexicon.");
+print("Lexicon entry modified");
 print("Lexicon gated");
+
+
 mods.thaumcraft.Research.addResearch("THAUMOMORPHICESSENCE", "FORBIDDEN", "praecantatio 15, herba 15, permutatio 15, sensus 5", -5, 4, 4, <TabulaRasa:RasaItem0:20>);
 game.setLocalization("en_US", "tc.research_name.THAUMOMORPHICESSENCE", "Thaumomorphic Botanist Essence");
 game.setLocalization("en_US", "tc.research_text.THAUMOMORPHICESSENCE", "Making flowers more Mystical.");
